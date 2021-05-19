@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Pressable,
+  // Pressable,
   Image,
   ScrollView,
   StyleSheet,
-  Text,
-  View,
+  // Text,
+  // View,
 } from 'react-native';
+
+import PressableTest from './components/PressableTest';
+import ViewTest from './components/ViewTest';
 
 export default class App extends Component {
   state = {
@@ -28,31 +31,33 @@ export default class App extends Component {
     console.log('isShowloading in render:', isShowloading);
     return (
       <ScrollView style={{ backgroundColor: 'blue' }}>
-        <View style={{ backgroundColor: 'white', padding: 30 }}>
+        <ViewTest />
+        {/* <View style={{ backgroundColor: 'white', padding: 30 }}>
           <Text style={[styles.textMargin, { fontSize: 30 }]}>Hello</Text>
           <Text style={[styles.textMargin, { textAlign: 'center' }]}>
             Native
           </Text>
           <Text style={[styles.textMargin, { fontWeight: 'bold' }]}>World</Text>
-        </View>
+        </View> */}
         <Image
           source={{
             uri: 'https://www.konexio.eu/uploads/1/2/0/2/120245745/konexio-logo_1.png',
           }}
-          style={{ width: 400, height: 100 }}
+          style={styles.image}
         ></Image>
         <Image
           source={require('./assets/konexio-logo_1.png')}
-          style={{ width: 400, height: 100 }}
+          style={styles.image}
         ></Image>
-        <Pressable>
+        <PressableTest onPress={this.toggleShowLoading} />
+        {/* <Pressable>
           <Text
             style={styles.textPressable}
-            onPress={() => this.toggleShowLoading()}
+            onPress={() => this.toggleShowloading}
           >
             Press on me please...
           </Text>
-        </Pressable>
+        </Pressable> */}
         {isShowloading ? (
           <ActivityIndicator style={styles.activityIndicator} />
         ) : null}
@@ -62,20 +67,24 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  textMargin: {
-    marginTop: 80,
-    marginBottom: 80,
-  },
-  textPressable: {
-    padding: 20,
-    fontSize: 20,
-    color: 'black',
-    backgroundColor: 'yellow',
-    textAlign: 'center',
-    marginTop: 20,
-  },
   activityIndicator: {
     marginTop: 40,
     marginBottom: 40,
   },
+  image: {
+    width: 400,
+    height: 100,
+  },
+  // textPressable: {
+  //   padding: 20,
+  //   fontSize: 20,
+  //   color: 'black',
+  //   backgroundColor: 'yellow',
+  //   textAlign: 'center',
+  //   marginTop: 20,
+  // },
+  // textMargin: {
+  //   marginTop: 80,
+  //   marginBottom: 80,
+  // },
 });
