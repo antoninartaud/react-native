@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Button,
   Pressable,
   Image,
   ScrollView,
@@ -11,7 +10,22 @@ import {
 } from 'react-native';
 
 export default class App extends Component {
+  state = {
+    showLoading: true,
+  };
+
+  toggleShowLoading = () => {
+    console.log('in toggleShowloading');
+    const currentState = this.state.showLoading;
+    console.log('currentState:', currentState);
+    this.setState({
+      showLoading: !currentState,
+    });
+  };
+
   render() {
+    let isShowloading = this.state.showLoading;
+    console.log('isShowloading in render:', isShowloading);
     return (
       <ScrollView style={{ backgroundColor: 'blue' }}>
         <View style={{ backgroundColor: 'white', padding: 30 }}>
@@ -32,11 +46,16 @@ export default class App extends Component {
           style={{ width: 400, height: 100 }}
         ></Image>
         <Pressable>
-          <Text style={styles.textPressable} onPress={() => alert('Pressed !')}>
+          <Text
+            style={styles.textPressable}
+            onPress={() => this.toggleShowLoading()}
+          >
             Press on me please...
           </Text>
         </Pressable>
-        <ActivityIndicator />
+        {isShowloading ? (
+          <ActivityIndicator style={styles.activityIndicator} />
+        ) : null}
       </ScrollView>
     );
   }
@@ -54,5 +73,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
     textAlign: 'center',
     marginTop: 20,
+  },
+  activityIndicator: {
+    marginTop: 40,
+    marginBottom: 40,
   },
 });
